@@ -17,8 +17,12 @@ function App() {
 
   return (
     <div>
+<<<<<<< HEAD
     <h2>Yograj singh changed this line</h2>
       <h1>Ths is a dumy feature added by Sarb</h1>
+=======
+    <h1>This is a line added by Sunny</h1>
+>>>>>>> def9233 (Testing github coolab)
     <h2>This is a dummy feature in the master branch</h2>
     <h2>This is 2nd dummy feature in the master branch</h2>
     {todos.map(todo=><Todo key={todo.id} title={todo.title} description={todo.description} />)}
