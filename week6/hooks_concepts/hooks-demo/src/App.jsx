@@ -18,6 +18,10 @@ function App() {
   return (
     <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      <h1>Ths is a dumy feature added by Sarb</h1>
+>>>>>>> 30372a5 (sarbjit conflict resolved)
     <h2>Yograj singh changed this line</h2>
       <h1>Ths is a dumy feature added by Sarb</h1>
 =======
