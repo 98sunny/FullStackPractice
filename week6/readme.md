@@ -315,5 +315,24 @@ export default App
 
 ```
 
+### useCallback
+- This is a hook which is similar to useMemo. useMemo helped in memoization of some output.
+- Here, **useCallback** is used for specifically memoizing used for functions.
+- useCallback makes sure that a **function isn't recreated every time your component re-renders** unless it really needs to be—typically because its dependencies have changed.
+- very useful when passing functions as props to child components/
 
-   
+#### Analogy
+Think of useCallback like making a promise to your friend to help them move. Once you make the promise, you don't make a new promise every day; you just stick to the original one until the day of the move, unless the plans change (like the date gets shifted). If the plans do change, then you make a new promise based on the new details.
+
+Example:
+```
+const memoizedCallback = useCallback(() => {
+    doSomething(a, b);
+}, [a, b]);
+```
+Here, [a,b] array contains the dependancies. 
+memoizedCallback will only be recreated if 'a' or 'b' changes. If tehse values stays, the same when any render happens, the same function reference from the previous render will be used.
+
+**The useCallback and useMemo Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function.**
+
+
