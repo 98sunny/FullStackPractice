@@ -335,4 +335,22 @@ memoizedCallback will only be recreated if 'a' or 'b' changes. If tehse values s
 
 **The useCallback and useMemo Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function.**
 
+## Reconciliation
+- We give documents to CA.
+- CA does calculations and reconcile net input, any tax returns, any extyra tax which we have to pay on the profits. And then return the final balance.
+  
+### In React
+- Reconciles all the states and give us the DOM.
+- Is it better to do this?--> Yes, helps us to delegate the DOM manipulation logic to React instead of writing on our own
+
+- Can we do DOM manipulation ourselves?--> Yep
+- Shoulwe do it ourselves?-->Nope
+- Is it good to delegate it to React?--> Yes
+- Waht do we give toReact?--> The state
+- How often react re-render?--> Everytime the state changes
+- Does react hace tricks to make calulation faster?--> Yes
+
+
+
+
 
