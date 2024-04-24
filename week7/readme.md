@@ -156,4 +156,103 @@ export default App
 
 ```
 
+## Prop drilling
+How should one manage State?
+Ideally, one should create various main components and then child components under them.
+
+This way the number of re render of the whole page is reduced when one of the components change.
+
+Rule of Thumb: Push the props down as much as possible to do.
+
+Prop Driling: Prop drilling means drilling down the components.
+
+![prop drilling and Context API](assets/propDrilling_contextAPI.png)
+
+**Props drilling makes code unmanagable. make code look visually unappealing if the state grows big**
+
+## Context API solves the Props drilling problem
+
+Is there a way to pass props without passing it to every below child element? YES!! Context API!!!
+
+```
+//App.jsx
+
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { Count } from './components/Count'
+import { Countrenderer } from './components/Countrenderer'
+import Buttons from './components/Buttons'
+import { CountContext } from './context'
+import ButtonUsingContextAPI from './components/ButtonUsingContextAPI'
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    
+    <>
+    {/* What if we wanted the Count component and Button component together?
+    The only way to do so is passing the prop */}
+      {/* <Count count={count} setCount={setCount}/> */}
+      <Count count={count} setCount={setCount}/>
+
+      {/* // wrap ayone that wants to use the "teleported value" inside a provider.
+
+  // We have wrap anyone who wants to us ContextAPI in a Provider
+  // Provider-> Provider is something which provides some value later on needed by other components. */}
+  <h3>Using ContextAPI</h3>
+      <CountContext.Provider value={{count, setCount}}>
+      {/* We dont need to pass as a prop --> count={counterContext} . it will automatically get the value from the CounterContext.Provider */}
+      <Countrenderer setCount={setCount}></Countrenderer>
+      <ButtonUsingContextAPI count={count} setCount={setCount}></ButtonUsingContextAPI>
+      </CountContext.Provider>
+    </>
+  )
+}
+
+export default App
+
+
+```
+
+- Components
+
+```
+import { useContext } from "react"
+import { CountContext } from "../context"
+
+export function Countrenderer(){
+    const {count, setCount}=useContext(CountContext);
+    return <div>Count is {count}</div>
+} 
+
+```
+
+```
+import { useContext } from "react";
+import {CountContext} from "../context"
+
+export default function ButtonUsingContextAPI(){
+    const {count,setCount}=useContext(CountContext);
+    return <div>
+    <button onClick={()=>{setCount(count+1)}}>Increment</button>
+    <button onClick={()=>{setCount(count-1)}}>Decrement</button>
+    </div>
+    
+}
+
+```
+
+- Context.jsx
+
+```
+import { createContext } from "react";
+// this helps us to "teleport" the state variable across various components
+// export const CountContext=createContext({count, setCount});
+export const CountContext=createContext();
+
+```
+
+
 
