@@ -254,5 +254,82 @@ export const CountContext=createContext();
 
 ```
 
+#### Drawbacks of Context API
+- For example, something changed for a child component, should the parent or any other component re render?
+- SO, even though the count will not be used somewhere else in the code will re render.
+- Hence, came in the State libraries to help us.
+
+So, why use Context API?
+- It makes Syntax cleaner.
+- And also get rid of Prop drilling.
+
+
+## State management using Recoil
+- React codebase could be divided in 2 parts: State logic and component logic
+- A cleaner way to store the state of our app.
+- Helps how we can have separate component logic and have a state logic and then glue them together.
+
+### Recoil
+State management library for React.
+helps with:
+- Flexible shared state
+- Derived data and queries
+- App-wide state observation.
+
+Other popular ones:
+- Zustand
+- Redux
+
+Things to learn:
+- RecoilRoot
+- atom
+- useRecoilState
+- useRecoilValue
+- useSetRecoilState
+- selector
+
+**Recoil gives value to 3 hooks:**
+- useRecoilState: We use this when we want to have both the get and the set value. It is same as useState().
+- useRecoilValue: We use this when we just want the value and dont want to update the value.
+- useSetRecoilValue: We use this only when we want to update the value and not get the value
+
+#### When to use useState vs atom?
+1. For global state variables, we should ideally use Recoil
+2. For input values, we could use useState.
+
+### Selectors
+- A selector represents a piece of **derived state**.
+- Drevied state is a output of passing state to a pur function that derived a new value from the said state.
+- If a re render happens only and only if the value of the recoil changes. We can use this when we know something completlely depends on a state variable.
+```
+export const evenSelector=selector({
+    key:"evenSelector",
+    // get is a function which has aargument which is a function which we use to get the value from countAtom
+    get: ({get})=>{
+        const count=get(countAtom);
+        return count%2;
+    }
+})
+//equivalent to
+export const even2Selector=selector({
+    key:"evenSelector",
+    // get is a function which has aargument which is a function which we use to get the value from countAtom
+    get: (props)=>{
+        const count=props.get(countAtom);
+        return count%2;
+    }
+})
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
