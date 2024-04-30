@@ -320,6 +320,95 @@ export const even2Selector=selector({
 ```
 
 
+### Asynchronous data queries in Recoil
+
+**app.jsx**
+
+```
+
+import './App.css'
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { notifications, totalNotificationSelector } from './atoms'
+import { useEffect } from 'react'
+import axios from 'axios'
+
+function App() {
+  return <RecoilRoot>
+    <MainApp />
+  </RecoilRoot>
+}
+
+function MainApp() {
+  const [networkCount, setNetworkCount] = useRecoilState(notifications)
+  const totalNotificationCount = useRecoilValue(totalNotificationSelector);
+
+  useEffect(() => {
+    // fetch
+    axios.get("https://sum-server.100xdevs.com/notifications")
+      .then(res => {
+        setNetworkCount(res.data)
+      })
+  }, [])
+
+  return (
+    <>
+      <button>Home</button>
+      <button>My network ({networkCount.networks >= 100 ? "99+" : networkCount.network})</button>
+      <button>Jobs {networkCount.jobs}</button>
+      <button>Messaging ({networkCount.messaging})</button>
+      <button>Notifications ({networkCount.notifications})</button>
+
+      <button>Me ({totalNotificationCount})</button>
+    </>
+  )
+}
+
+export default App
+
+
+```
+
+**atom.js**
+
+```
+import axios from "axios";
+import { atom, selector } from "recoil";
+
+export const notifications = atom({
+    key: "networkAtom",
+    default: selector({
+        key:"networkAtomSelector",
+        get: async ()=>{
+            await new Promise((resolve)=>setTimeout(resolve,5000))
+            const res=await axios.get("https://sum-server.100xdevs.com/notifications")
+            return res.data
+        }
+    })
+});
+
+export const totalNotificationSelector = selector({
+    key: "totalNotificationSelector",
+    get: ({get}) => {
+        const allNotifications = get(notifications);
+        return allNotifications.network + 
+        allNotifications.jobs + 
+        allNotifications.notifications + 
+        allNotifications.messaging
+    }
+})
+
+```
+## Below is a better approach
+### AtomFamily
+- Sometimes we need more than one atom for our use case.
+- Example: To do application--> this will have multiple todos.
+- Question: Craete a component that takes a todo it as input and renders the TODO. Here, the constraint is to do this using Atom(should not use useState).
+- All the TODOs can be hardcoded as a variable 
+
+Rather than each component having their own component, all the different components subscribe to an Atom Family. 
+
+### SelectorFamily
+
 
 
 
