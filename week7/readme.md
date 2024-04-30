@@ -49,9 +49,6 @@ function App() {
 
     </BrowserRouter>
     </div>
-    
-     
-
   )
 }
 ```
