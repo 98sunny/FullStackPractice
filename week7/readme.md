@@ -398,12 +398,15 @@ export const totalNotificationSelector = selector({
 })
 
 ```
-## Below is a better approach
+
 ### AtomFamily
+- atomfamily lets us crreate multiple atoms dynamically  
 - Sometimes we need more than one atom for our use case.
+  
 - Example: To do application--> this will have multiple todos.
 - Question: Craete a component that takes a todo it as input and renders the TODO. Here, the constraint is to do this using Atom(should not use useState).
-- All the TODOs can be hardcoded as a variable 
+- All the TODOs can be hardcoded as a variable.
+- 
 
 Rather than each component having their own component, all the different components subscribe to an Atom Family. 
 
