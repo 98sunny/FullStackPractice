@@ -1,3 +1,4 @@
+# Flex
 - Flex
   - Each div covers a whole row.
   - flex allows us to get div one beside the other.
@@ -11,7 +12,40 @@
 
 ![./assets/flex.png](./assets/flex.png)
 
+# Grid
 - Grids
+Another way to put <div> in one row is Grid.
+
+# CSS Grid Layout Notes
+
+This repository contains detailed notes on CSS Grid Layout, a powerful layout system available in CSS. It provides a method of creating grid-based layouts that are fully responsive and easy to modify.
+
+## Introduction to CSS Grid
+
+CSS Grid Layout excels at dividing a page into major regions and defining the **relationship in terms of size, position, and layer**. **Unlike Flexbox** which is largely for laying out items in a single dimension, **Grid provides two-dimensional control over layout arrangements**.
+
+### Key Features
+
+- **Two-dimensional layout control**: Arrange items in rows and columns simultaneously.
+- **Flexibility**: Easily adjust layout with minimal CSS.
+- **Integration**: Works well with other CSS features like Flexbox and traditional CSS positioning.
+
+## Getting Started with CSS Grid
+
+To use CSS Grid, you need to define a container element as a grid with display property set to grid or inline-grid.
+
+### Basic Grid Example
+
+```html
+<div class="grid-container">
+  <div class="grid-item">1</div>
+  <div class="grid-item">2</div>
+  <div class="grid-item">3</div>
+  <div class="grid-item">4</div>
+  <div class="grid-item">5</div>
+</div>
+```
+
 - Responsivness
 - Background color, tex color, hover
 
